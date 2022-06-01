@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <a href="/home">首页</a>
+  <a href="/about">关于</a>
+
+  <div class="route"></div>
+  <script>
+    const routeEl = document.getElementsByClassName("route")[0]
+    const alla = document.getElementsByTagName("a")
+    for (let element of alla) {
+      element.addEventListener("click", (item) => {
+        // 取消a元素的默认行为
+        item.preventDefault();
+        const href = element.getAttribute("href")
+        console.log(href);
+        // 重新设置url
+        history.pushState({}, "", href)
+        // 根据url决定显示的内容
+        urlChange()
+      })
+    }
+    // 监听返回的操作
+    window.addEventListener("popstate", urlChange)
+    function urlChange() {
+      switch (location.pathname) {
+        case "/home":
+          routeEl.innerHTML = "shouye"
+          break;
+        case "/about":
+          routeEl.innerHTML = "about"
+          break;
+        default:
+          routeEl.innerHTML = "default"
+      }
+    }
+  </script>
+</body>
+
+</html>

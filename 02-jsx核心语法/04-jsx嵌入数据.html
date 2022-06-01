@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>react模板</title>
+</head>
+
+<body>
+  <div id="app"></div>
+</body>
+<!-- 1.引入react依赖 -->
+<script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+<!-- 2.编写react代码 -->
+<script type="text/babel">
+  class App extends React.Component {
+    constructor() {
+      super()
+      this.state = {
+        // 1.可以显示
+        msg: "hello world",
+        n: 0,
+        arr: ["1", "2", "3"],
+
+        // 2.不可以显示
+        t1: null,
+        t2: undefined,
+        t3: true,
+
+        // 3.表达式
+        t4: true,
+        t5: "7777",
+
+        // 4.对象不能作为jsx的子类
+        obj: {
+          name: "hhh",
+          age: 78
+        }
+      }
+    }
+    render() {
+      return (
+        <div>
+          <h2>{this.state.msg}</h2>
+          <h2>{this.state.n}</h2>
+          <h2>{this.state.arr[2]}</h2>
+
+          <h2>{this.state.t1}</h2>
+          {/*最简单的是在最后拼接一个空字符串进行转换*/}
+          <h2>{this.state.t2 + ''}</h2>
+          {/*布尔值可以使用toString函数转换为字符串显示*/}
+          <h2>{this.state.t3.toString()}</h2>
+
+          <h2>{this.state.t4 ? '--true' : "--false"}</h2>
+          <h2>{this.state.msg + ' ' + this.state.t5}</h2>
+          <h2 title={hh}>{this.running()}</h2>
+
+          {/*对象不能作为子类*/}
+          <h2>{this.state.obj}</h2>
+        </div>
+      )
+    }
+    running() {
+      console.log("running");
+    }
+  }
+  ReactDOM.render(<App />, document.getElementById("app"))
+</script>
+
+</html>

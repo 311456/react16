@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>react实现</title>
+</head>
+
+<body>
+    <div id="app"></div>
+</body>
+<!-- 1.引入react依赖文件（手动引入） 
+crossorigin是为了打印远地代码的错误-->
+<script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+<!-- 2.使用jsx编写代码 
+如果要使用jsx编写代码，并且希望被解析，则需要给script标签添加“text/babel”的类型-->
+<script type="text/babel">
+    // a.定义数据
+    let msg = "hello world"
+    // c.修改数据
+    function btnClick() {
+        msg = "hello react"
+        render()
+    }
+    function render() {
+        // 源码返回的渲染函数
+        ReactDOM.render(
+            // jsx特点：只能有一个根标签
+            <div>
+            {/* 我是注释*/}
+                <h2>{msg}</h2>
+                <button onClick={btnClick}>修改数据</button>
+            </div>
+            , document.getElementById("app"))
+    }
+    // b.渲染数据
+    render()
+</script>
+
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>react模板</title>
+</head>
+
+<body>
+  <div id="app"></div>
+</body>
+<!-- 1.引入react依赖 -->
+<script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+<!-- 2.编写react代码 -->
+<script type="text/babel">
+  class App extends React.Component {
+    constructor() {
+      super()
+      this.state = {
+        counter: 0
+      }
+    }
+    render() {
+      return (
+        <div>
+          <h2>{this.state.counter}</h2>
+          <button onClick={this.increment.bind(this)}>＋1</button>
+          <button onClick={this.decrement.bind(this)}>减一</button>
+        </div>
+      )
+    }
+    increment() {
+      this.setState({
+        // ++不能实现效果，但是也不报错
+        counter: this.state.counter + 1
+      })
+    }
+    decrement() {
+      this.setState({
+        counter: this.state.counter - 1
+      })
+    }
+  }
+  ReactDOM.render(<App />, document.getElementById("app"))
+</script>
+
+</html>

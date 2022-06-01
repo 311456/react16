@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>react模板</title>
+</head>
+
+<body>
+  <div id="app"></div>
+</body>
+<!-- 1.引入react依赖 -->
+<script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+<!-- 2.编写react代码 -->
+<script type="text/babel">
+  class App extends React.Component {
+    constructor() {
+      super()
+      this.state = {
+        msg: "电影列表",
+        movies: ["进击的巨人", "堀与宫村", "元气少女缘结神", "快乐星球", "司法解释"]
+      }
+    }
+    render() {
+      // 1.for循环
+      let newM = []
+      for (let movie of this.state.movies) {
+        // jsx特别的写法，可以用原生的标签进行赋值
+        newM.push(<li>{movie}</li>)
+      }
+      // 2.map方式
+      const new1 = this.state.movies.map((item) => <li>{item}</li>)
+      return (
+        <div>
+          <h2>{this.state.msg}</h2>
+          <ul>
+            {newM}
+          </ul>
+          <h3>list 2</h3>
+          <ul>
+            <li>{new1}</li>
+          </ul>
+        </div>
+      )
+    }
+  }
+  ReactDOM.render(<App />, document.getElementById("app"))
+</script>
+
+</html>

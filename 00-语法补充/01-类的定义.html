@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>类的定义</title>
+</head>
+
+<body>
+
+</body>
+<script>
+  // es5定义类
+  // function Person(name, age) {
+  //   this.name = name
+  //   this.age = age
+  // }
+  // person.prototype.running = function () {
+  //   console.log("running")
+  // }
+  // const stu = new Person("har", 14)
+  // console.log(stu.name, stu.age);
+  // stu.running()
+
+  // es6定义类
+  class Person {
+    constructor(name, age) {
+      this.name = name
+      this.age = age
+    }
+    running() {
+      console.log("running");
+    }
+  }
+  const stu = new Person("xdy", 56)
+  console.log(stu.name, stu.age);
+  stu.running()
+</script>
+
+</html>

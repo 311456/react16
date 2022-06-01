@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>react模板</title>
+</head>
+
+<body>
+  <div id="app"></div>
+</body>
+<!-- 1.引入react依赖 -->
+<script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+<!-- 2.编写react代码 -->
+<script type="text/babel">
+  class App extends React.Component {
+    constructor() {
+      super()
+      this.state = {
+        msg: "hello world"
+      }
+    }
+    render() {
+      return (
+        <div>
+          <h2>hhhhhhh</h2>
+          <div>
+            <div className="title">title</div>
+            <h2>686558</h2>
+          </div>
+          <div>
+            <h2>it is article</h2>
+            <div>hhhhdsihdswhsdshdskh</div>
+            <button>hhh</button>
+          </div>
+        </div>
+      )
+    }
+  }
+  // pure表示是纯函数
+  let App2 = /*#__PURE__*/
+    React.createElement("div", null, /*#__PURE__*/React.createElement("h2", null, "hhjhjhjhj"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+      className: "title"
+    }, "title"), /*#__PURE__*/React.createElement("h2", null, "686558")), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h2", null, "it is article"), /*#__PURE__*/React.createElement("div", null, "hhhhdsihdswhsdshdskh"), /*#__PURE__*/React.createElement("button", null, "hhh")));
+
+  // ReactDOM.render(<App />, document.getElementById("app"))
+  ReactDOM.render(App2, document.getElementById("app"))
+</script>
+
+</html>

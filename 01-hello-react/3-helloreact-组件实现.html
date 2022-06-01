@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>react组件实现</title>
+</head>
+
+<body>
+  <div id="app"></div>
+</body>
+<!-- 引入依赖 -->
+<script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+<!-- 开始开发 -->
+<script type="text/babel">
+  // 1.封装组件，首字母必须大写
+  class App extends React.Component {
+    // 属性封装到constructor中
+    constructor() {
+      // super相当于把React.Component的constructor给执行了。如果传参的话相当于给React.Component传参
+      super()
+      this.state = {
+        msg: "hello world"
+      }
+    }
+    btnClick() {
+      // 修改数据只能使用该函数
+      this.setState({
+        msg: "hello react"
+      })
+    }
+    render() {
+      // 因为render执行时绑定了undefined，需要手动修改this的指向
+      return (
+        <div>
+          <h2>{this.state.msg}</h2>
+          <button onClick={this.btnClick.bind(this)}>修改数据</button>
+        </div>)
+    }
+  }
+
+  // 2.渲染数据
+  ReactDOM.render(<App />, document.getElementById("app"))
+</script>
+
+</html>

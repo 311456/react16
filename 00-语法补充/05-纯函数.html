@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 纯函数
+    function add(n1, n2) {
+      return n1 + n2
+    }
+
+    // 不是纯函数
+    let total = 0
+    function add1(n1) {
+      return total + n1
+    }
+    console.log(add1(3));
+    // 修改之后，对应的输入没有一个确定的输出
+    total = 3
+    console.log(add1(3));
+
+    // 纯函数
+    const total1 = 0
+    function add1(n1) {
+      return total1 + n1
+    }
+    console.log(add1(3));
+    total = 3
+    console.log(add1(3)); 
+  </script>
+</body>
+
+
+</html>

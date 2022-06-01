@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // // 1.普通函数
+    // function foo() { }
+    // console.log(foo()); //undefined
+
+    // // 2.生成器函数：返回迭代器（是一个对象）。yield返回数据
+    // // 调用一次next，就会消耗一次迭代器
+    // function* foo1() { }
+    // console.log(foo1());
+    // // 代码执行顺序
+    // function* foo2() {
+    //   console.log("1");
+    //   yield "111"
+    //   console.log("2");
+    //   yield "222"
+    //   console.log("3");
+    //   yield "333"
+    // }
+    // console.log("--", foo2());
+    // console.log("--", foo2().next());
+    // console.log("--", foo2().next().value);
+
+    // const it = foo2()
+    // console.log(it.next());
+    // console.log(it.next());
+    // console.log(it.next());
+    // console.log(it.next());
+
+    // // 练习：打印5-10
+    // function* foo3() {
+    //   for (let i = 5; i < 10; i++) {
+    //     yield i
+    //   }
+    // }
+    // const nit = foo3()
+    // console.log(nit.next().value);
+    // console.log(nit.next().value);
+    // console.log(nit.next().value);
+
+    // 结合promise
+    function* foo4() {
+      console.log("444");
+      // 赋值的操作在yield操作之后才执行，所以在使用时要再调一次next
+      const result = yield new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve("hello 444")
+        }, 3000)
+      })
+      console.log(result);
+    }
+
+    const it4 = foo4()
+    it4.next().value.then(res => {
+      // 第二次next时传入一个参数，会作为第一次yield的结果，然后就会进行const result = res赋值操作
+      it4.next(res)
+    })
+  </script>
+</body>
+
+</html>

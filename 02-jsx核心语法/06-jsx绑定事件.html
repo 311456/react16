@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>react模板</title>
+</head>
+
+<body>
+  <div id="app"></div>
+</body>
+<!-- 1.引入react依赖 -->
+<script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+<!-- 2.编写react代码 -->
+<script type="text/babel">
+  class App extends React.Component {
+    constructor() {
+      super()
+      this.state = {
+        msg: "hello world"
+      }
+      // 方式一的优化
+      this.btnClick0.bind(this)
+    }
+    render() {
+      return (
+        <div>
+          <h2>{this.state.msg}</h2>
+          {/* 1.手动绑定this*/}
+          <button onClick={this.btnClick.bind(this)}>按钮1</button>
+          <button onClick={this.btnClick0}>按钮0</button>
+          {/* 2.将事件处理函数使用箭头函数赋值，因为箭头函数中没有this，所以react内部绑定this不起作用，执行时会在作用域中寻找this。*/}
+          <button onClick={this.btnClick2}>按钮2</button>
+          {/* 3.将事件处理函数写在箭头函数中，由我们自己调用。该方式传递参数时也更加的方便*/}
+          <button onClick={() => { this.btnClick() }}>按钮3</button>
+          <button onClick={(e) => { this.btnClick4(e, "har") }}>按钮4</button>
+          {/* 简写*/}
+          <button onClick={e => this.btnClick4(e)}>按钮4</button>
+        </div>
+      )
+    }
+    btnClick(e) {
+      console.log("按钮被点击", e);
+    }
+    btnClick0() {
+      console.log("000000");
+    }
+    btnClick4(e, name) {
+      console.log("444", e, name);
+    }
+    // 方式2
+    btnClick2 = () => {
+      console.log("222222");
+    }
+  }
+  ReactDOM.render(<App />, document.getElementById("app"))
+</script>
+
+</html>

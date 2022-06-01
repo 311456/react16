@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>react模板</title>
+</head>
+<style>
+  table {
+    border: 1px solid #eee;
+    border-collapse: collapse;
+  }
+
+  th,
+  td {
+    border: 1px solid #eee;
+    padding: 10px 15px;
+  }
+</style>
+
+<body>
+  <div id="app"></div>
+</body>
+<!-- 1.引入react依赖 -->
+<script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+<script src="./formatPrice.js"></script>
+<!-- 2.编写react代码 -->
+<script type="text/babel">
+  class App extends React.Component {
+    constructor() {
+      super()
+      this.state = {
+        books: [{
+          id: 1,
+          name: "vue从入门到入坟",
+          date: "2022-2",
+          price: 88,
+          count: 4
+        },
+        {
+          id: 2,
+          name: "react入门",
+          date: "2022-2",
+          price: 57,
+          count: 1
+        },
+        {
+          id: 3,
+          name: "入坟",
+          date: "2022-2",
+          price: 98,
+          count: 1
+        },
+        {
+          id: 4,
+          name: "angular入坟",
+          date: "2022-2",
+          price: 90,
+          count: 2
+        }]
+      }
+    }
+    // 函数式编程
+    books() {
+      let { books } = this.state
+      return (
+        <div>
+          <table>
+            <thead>
+              <tr>
+                <th></th>
+                <th>书籍名称</th>
+                <th>出版日期</th>
+                <th>价格</th>
+                <th>数量</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              {books.map((item, index) => {
+                return (
+                  <tr>
+                    <td>{index + 1}</td>
+                    <td>{item.name}</td>
+                    <td>{item.date}</td>
+                    <td>{formatPrice(item.price)}</td>
+                    <td>
+                      <button disabled={item.count <= 1} onClick={() => this.changeCount(index, -1)}>-</button>
+                      <span> {item.count} </span>
+                      <button onClick={() => this.changeCount(index, +1)}>+</button>
+                    </td>
+                    <td><button onClick={() => this.btnRemove(index)}>移除</button></td>
+                  </tr>
+                )
+              })}
+            </tbody>
+          </table>
+          <h2>总价格：{formatPrice(books.reduce((pre, item) => {
+            return pre + item.price * item.count
+          }, 0))}</h2>
+        </div>
+      )
+    }
+    empty() {
+      return <h2>购物车为空</h2>
+    }
+    render() {
+      return this.state.books.length ? this.books() : this.empty()
+    }
+    changeCount(index, n) {
+      let newArr = this.state.books
+      newArr[index].count += n
+      this.setState({
+        books: newArr
+      })
+    }
+
+    btnRemove(index) {
+      this.setState({
+        // 高阶函数：筛选。当要移除的下标值不等于遍历序号值时，该值就加入新数组中
+        books: this.state.books.filter((item, indey) => index !== indey)
+      })
+    }
+  }
+  ReactDOM.render(<App />, document.getElementById("app"))
+</script>
+
+</html>

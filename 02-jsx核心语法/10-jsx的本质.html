@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>react模板</title>
+</head>
+
+<body>
+  <div id="app"></div>
+</body>
+<!-- 1.引入react依赖 -->
+<script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+<!-- 2.编写react代码 -->
+<script type="text/babel">
+  class App extends React.Component {
+    constructor() {
+      super()
+      this.state = {
+        msg: "hello world"
+      }
+    }
+    render() {
+      let obj = (
+        <div>
+          <h2>hello world</h2>
+        </div>
+      )
+      console.log(obj);
+      return obj
+    }
+  }
+  let App2 = React.createElement("h2", null, "hello world")
+  // 2种方式的渲染结果是一样的，jsx的本质就是React.createElement函数的语法糖形式。
+  ReactDOM.render(<App />, document.getElementById("app"))
+  // 该方式可以不用引入babel文件，以及script标签的type属性
+  // ReactDOM.render(App2, document.getElementById("app"))
+</script>
+
+</html>
